@@ -86,9 +86,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
-        'USER': 'DTom493@dandthetoms.postgres.database.azure.com',
+        'USER': 'D3TUND22',
         'PASSWORD': 'UND2022!',
-        'HOST': 'dandthetoms.postgres.database.azure.com',
+        'HOST': 'd3tund.postgres.database.azure.com',
         'PORT': '5432',
     }
 }
