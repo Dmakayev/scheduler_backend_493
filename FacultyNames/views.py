@@ -8,6 +8,7 @@ from FacultyNames.serializers import FacultySerializer
 
 from django.core.files.storage import default_storage
 
+
 @csrf_exempt
 def facultyApi(request, fid=0):
     if request.method == 'GET':
@@ -22,12 +23,12 @@ def facultyApi(request, fid=0):
             return JsonResponse("Added Succesfully", safe=False)
         return JsonResponse("Failed to Add", safe=False)
     elif request.method == 'PUT':
-        faculty_data = JSONParser.parse(request)
-        faculty = Faculty.objects.get(id=faculty_data['id'])
+        faculty_data = JSONParser().parse(request)
+        faculty = Faculty.objects.get(id=fid)
         faculty_serializer = FacultySerializer(faculty, data=faculty_data)
         if faculty_serializer.is_valid():
             faculty_serializer.save()
-            return JsonResponse("Updated Successfully",safe=False)
+            return JsonResponse("Updated Successfully", safe=False)
         return JsonResponse("Failed to Update")
     elif request.method == 'DELETE':
         faculty = Faculty.objects.get(id=fid)
