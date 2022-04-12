@@ -7,5 +7,4 @@ class FileUploadSerializer(serializers.ModelSerializer):
         model = FileUpload
         fields = ('id',
                   'name',
-                  'url',
-                  'uploadedFile')
+                  'url')
