@@ -22,6 +22,7 @@ urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path(r'^', include('FacultyNames.urls')),
     re_path(r'^', include('FileUpload.urls')),
+    re_path(r'^', include('CourseTables.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

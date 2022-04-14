@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from FacultyNames.models import Faculty
+from CourseTables.models import TempCourse
 
 
-class FacultySerializer(serializers.ModelSerializer):
+class CourseSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Faculty
-        fields = ('id', 'lastName', 'firstName', 'email', 'phone', 'department', 'title')
+        model = TempCourse
+        fields = ('classNumber', 'className', 'credits', 'sectionNumber', 'capacity', 'room', 'waitSize', 'enrollment',
+                  'days', 'uniqueCourseID', 'time', 'instructor')

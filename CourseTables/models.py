@@ -25,17 +25,34 @@ class Departments(models.Model):
 class Classes(models.Model):
     models.ForeignKey.null = True
     secID = models.AutoField(primary_key=True)
-    cName = models.TextField()
+    courseName = models.TextField()
     Department = models.ForeignKey(Departments, on_delete=models.CASCADE)
     Professor = models.ForeignKey(Professors, on_delete=models.SET_NULL)
     Professor.null = True
-    cNum = models.IntegerField()
-    Credits = models.TextField()
-    Days = models.TextField()
-    startTime = models.TimeField()
-    endTime = models.TimeField()
+    courseNumber = models.TextField()
+    credits = models.TextField()
+    days = models.TextField()
+    time = models.TextField()
+    waitSize = models.TextField()
+    sectionNumber = models.TextField()
+    enrollment = models.TextField()
     room = models.ForeignKey(Rooms, on_delete=models.SET_NULL)
     room.null = True
+
+
+class TempCourse(models.Model):
+    classNumber = models.TextField()
+    className = models.TextField()
+    credits = models.TextField()
+    sectionNumber = models.TextField()
+    capacity = models.TextField()
+    room = models.TextField()
+    waitSize = models.TextField()
+    enrollment = models.TextField()
+    days = models.TextField()
+    uniqueCourseID = models.TextField(primary_key=True)
+    time = models.TextField()
+    instructor = models.TextField()
 
 
 class Meetings(models.Model):
