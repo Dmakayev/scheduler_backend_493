@@ -1,6 +1,7 @@
 import re
 from tika import parser
 import json
+from CourseTables.models import *
 
 
 def parsePDF(deptInfo, outFile):
@@ -54,6 +55,22 @@ def parsePDF(deptInfo, outFile):
                         {'sectionNumber': section, 'capacity': capacity, 'room': room, 'waitSize': waitSize,
                          'enrollment': enrollment, 'days': days,
                          'number': number, 'time': time, 'instructor': instructor})
+
+                    sendCourse = TempCourse()
+                    sendCourse.classNumber = classNumber
+                    sendCourse.className = className
+                    sendCourse.credits = credits
+                    sendCourse.sectionNumber = section
+                    sendCourse.capacity = capacity
+                    sendCourse.room = room
+                    sendCourse.waitSize = waitSize
+                    sendCourse.enrollment = enrollment
+                    sendCourse.days = days
+                    sendCourse.uniqueCourseID = number
+                    sendCourse.time = time
+                    sendCourse.instructor = instructor
+                    sendCourse.save()
+
                     index = index + 3
                     while index < len(lines) and lines[index][0:5] == "     ":
                         index = index + 1

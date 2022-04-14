@@ -26,14 +26,15 @@ def fileupload_list(request):
         fileUpload_data = request.FILES['file']
         fs = FileSystemStorage()
         filename = fs.save(fileUpload_data.name, fileUpload_data)
-        # uploaded_url = fs.url(filename)
-        # pdfParser = JSONParser().parse(filename)
-        # pdf_serializer = FileUploadSerializer(data=pdfParser)
-        # if pdf_serializer.is_valid():
-        #     pdf_serializer.save()
-        namesz = PDFParser.ParsePDF.main(fs.base_location + "/" + filename)
-        return JsonResponse("File Uploaded Successfully!", status=200, safe=False)
+        uploaded_url = fs.url(filename)
+        uploadFile = FileUpload()
+        uploadFile.name = filename
+        uploadFile.url = "http://" + request.get_host() + uploaded_url
+        uploadFile.file = fileUpload_data
+        uploadFile.save()
+        PDFParser.ParsePDF.main(fs.base_location + "/" + filename)
 
+        return JsonResponse("File Uploaded Successfully!", status=200, safe=False)
 
     elif request.method == 'DELETE':
         count = FileUpload.objects.all().delete()
