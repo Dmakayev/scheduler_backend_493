@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'FileUpload',
     'FacultyNames',
     'corsheaders',
+    'CourseTables',
 ]
 
 MIDDLEWARE = [
