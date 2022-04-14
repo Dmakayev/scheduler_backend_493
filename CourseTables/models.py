@@ -25,15 +25,16 @@ class Departments(models.Model):
 class Classes(models.Model):
     models.ForeignKey.null = True
     secID = models.AutoField(primary_key=True)
-    cName = models.TextField()
+    courseName = models.TextField()
     Department = models.ForeignKey(Departments, on_delete=models.CASCADE)
     Professor = models.ForeignKey(Professors, on_delete=models.SET_NULL)
     Professor.null = True
-    cNum = models.IntegerField()
-    Credits = models.TextField()
-    Days = models.TextField()
-    startTime = models.TimeField()
-    endTime = models.TimeField()
+    courseNumber = models.IntegerField()
+    credits = models.TextField()
+    days = models.TextField()
+    time = models.TextField()
+    waitSize = models.TextField()
+    enrollment = models.TextField()
     room = models.ForeignKey(Rooms, on_delete=models.SET_NULL)
     room.null = True
 
