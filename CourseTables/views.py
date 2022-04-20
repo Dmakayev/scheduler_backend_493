@@ -8,8 +8,8 @@ from CourseTables.models import Professors
 from CourseTables.models import Meetings
 from CourseTables.models import Rooms
 from CourseTables.models import Departments
-from CourseTables.serializers import CourseSerializer
-from CourseTables.models import TempCourse
+from CourseTables.serializers import CourseSerializer, MeetingSerializer
+from CourseTables.models import TempCourse, TempMeeting
 
 from django.core.files.storage import default_storage
 
@@ -39,6 +39,34 @@ def courseApi(request, fid=0):
         course = TempCourse.objects.get(id=fid)
         course.delete()
         return JsonResponse("Deleted Succesfully", safe=False)
+
+@csrf_exempt
+def requestAPI(request, fid=0):
+    if request.method == 'GET':
+        meeting = TempMeeting.objects.all()
+        meeting_serializer = MeetingSerializer(meeting, many=True)
+        return JsonResponse(meeting_serializer.data, safe=False)
+    elif request.method == 'POST':
+        meeting_data = JSONParser().parse(request)
+        meeting_serializer = MeetingSerializer(data=meeting_data)
+        if meeting_serializer.is_valid():
+            meeting_serializer.save()
+            return JsonResponse("Added Succesfully", safe=False)
+        return JsonResponse("Failed to Add", safe=False)
+    elif request.method == 'PUT':
+        meeting_data = JSONParser().parse(request)
+        meeting = TempMeeting.objects.get(id=fid)
+        meeting_serializer = MeetingSerializer(meeting, data=meeting_data)
+        if meeting_serializer.is_valid():
+            meeting_serializer.save()
+            return JsonResponse("Updated Successfully", safe=False)
+        return JsonResponse("Failed to Update")
+    elif request.method == 'DELETE':
+        meeting = TempMeeting.objects.get(id=fid)
+        meeting.delete()
+        return JsonResponse("Deleted Succesfully", safe=False)
+
+
 
 
 @csrf_exempt

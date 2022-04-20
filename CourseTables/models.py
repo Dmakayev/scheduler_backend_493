@@ -55,6 +55,19 @@ class TempCourse(models.Model):
     instructor = models.TextField()
 
 
+class TempMeeting(models.Model):
+    mID = models.AutoField(primary_key=True)
+    firstName = models.TextField()
+    lastName = models.TextField()
+    classNumber = models.TextField()
+    sectionNumber = models.TextField()
+    className = models.TextField()
+    room = models.TextField()
+    eventType = models.TextField()
+    startTime = models.TextField()
+    endTime = models.TextField()
+
+
 class Meetings(models.Model):
     mID = models.AutoField(primary_key=True)
     mName = models.TextField()
