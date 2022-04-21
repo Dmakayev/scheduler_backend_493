@@ -29,14 +29,14 @@ def courseApi(request, fid=0):
         return JsonResponse("Failed to Add", safe=False)
     elif request.method == 'PUT':
         course_data = JSONParser().parse(request)
-        course = TempCourse.objects.get(id=fid)
+        course = TempCourse.objects.get(uniqueCourseID=fid)
         course_serializer = CourseSerializer(course, data=course_data)
         if course_serializer.is_valid():
             course_serializer.save()
             return JsonResponse("Updated Successfully", safe=False)
         return JsonResponse("Failed to Update")
     elif request.method == 'DELETE':
-        course = TempCourse.objects.get(id=fid)
+        course = TempCourse.objects.get(uniqueCourseID=fid)
         course.delete()
         return JsonResponse("Deleted Succesfully", safe=False)
 
